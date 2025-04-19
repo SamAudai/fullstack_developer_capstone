@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CarMake, CarModel
+from .models import CarModel, CarMake
 
 
 # Register your models here.
@@ -10,7 +10,18 @@ from .models import CarMake, CarModel
 
 # CarMakeAdmin class with CarModelInline
 
+
+class CarMakeAdmin(admin.ModelAdmin):
+    fields = ["name", "description"]
+    search_fields = ['name']
+
+
+class CarModelAdmin(admin.ModelAdmin):
+    fields = ["car_make", "name", "type", "year"]
+
+
 # Register models here
-# Registering models with their respective admins
-admin.site.register(CarMake)
-admin.site.register(CarModel)
+admin.site.register(CarMake, CarMakeAdmin)
+
+
+admin.site.register(CarModel, CarModelAdmin)
